@@ -28,3 +28,22 @@ module.exports.createUser = async (req, res, next) => {
     }
 
 }
+
+module.exports.updateUser = async (req, res, next) => {
+    var {email, password, full_name} = req.body
+
+    var newUser = new User(
+        {
+            email: email,
+            password: password,
+            fullName: full_name
+        }
+    )
+    try {
+        await newUser.save()
+        res.send("save oke")
+    } catch (err){
+        next(err)
+    }
+
+}
